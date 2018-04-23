@@ -1,0 +1,18 @@
+.done {
+    border: rgb(82, 204, 245) solid 2px; 
+    border-radius: 5px;
+    background-color: rgb(255, 248, 240); 
+   }
+div {
+       margin: 5px;
+       border: white solid 2px;
+       width: 170px;
+   }  
+.user {
+    width: 150px;
+    height: 200px;
+    border: blue 1px solid !important;
+    background-repeat: no-repeat; 
+    background-position: 50% 50%;
+    border-radius: 5px;
+}
