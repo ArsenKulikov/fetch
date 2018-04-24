@@ -3,7 +3,8 @@ const main = document.getElementById('datas');
 let requestId = true;             
 
 function getUserList(){             
-    
+    if (!requestId) return; 
+
     const butt = event.target;
     const div = document.createElement('div');
     const url = `${ROOT}/users?page=${butt.value}`;
@@ -11,20 +12,22 @@ function getUserList(){
     const elem = document.getElementById(`div${butt.value}`)
        
     
-    if (elem === null && requestId === true){
+    if (elem === null && requestId){
         requestId = false
         fetch(url)
         .then(data => data.json())
         .then(data =>
             {                   
                 const users = data.data;
-                users.map(function(user){
-                    div.innerHTML += JSON.stringify(user);
+                const usersList = users.map(function(user){
+                    return `${user.first_name} ${user.last_name}`
                     });
-                main.appendChild(div);       
+                div.innerHTML = usersList    
+                main.appendChild(div);
+                requestId = true       
             }
         )
-        setTimeout(function(){requestId = true}, 500)
+        
 
     } else if (elem !== null) {
         elem.classList.add('done');
@@ -42,5 +45,7 @@ function hideIt(){
 
 buttons.addEventListener("dblclick", hideIt);
 buttons.addEventListener("click", getUserList);
+
+
 
 
